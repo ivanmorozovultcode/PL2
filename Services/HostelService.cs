@@ -9,9 +9,9 @@ namespace Services
 {
     public class HostelService
     {
-        public bool AddHostel(int number, int rooms)
+        public bool AddHostel(int number)
         {
-            if (number >0 && rooms > 0)
+            if (number >0)
             {
                 using (DataBaseContext db = new DataBaseContext())
                 {
@@ -19,11 +19,9 @@ namespace Services
                     Hostel hostel = new Hostel
                     {
                         Number = number,
-                        Room = rooms,
-                      //  Residents = residents
                     };
 
-                    db.Add(hostel);
+                    db.Hostels.Add(hostel);
                     db.SaveChanges();
                     return true;
                 }
@@ -33,7 +31,32 @@ namespace Services
                 return false;
             }
         }
-        public bool ChangeHostel(int number, int rooms)
+        public bool AddRoom(int room, int hostelnumber)
+        {
+            if ( room > 0 && hostelnumber>0)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+
+                    var FindedHostel = db.Hostels.Where(a => a.Number == hostelnumber).FirstOrDefault();
+                    Room room1 = new Room
+                    {
+                       RoomNumber = room,
+                       IDHostel = FindedHostel.ID
+                    };
+
+                    db.Rooms.Add(room1);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        public bool ChangeHostel(int number)
         {
             if (number > 0 )
             {
@@ -41,7 +64,6 @@ namespace Services
                 {
                     var FindedHostel = db.Hostels.Where(a=>a.Number==number).FirstOrDefault();
                     FindedHostel.Number = number;
-                    FindedHostel.Room = rooms;
                    
                     db.SaveChanges();
                     return true;
@@ -49,33 +71,32 @@ namespace Services
             }
             else return false;
         }
-        public bool DeleteStudent(int number, string surname)
+        public bool DeleteStudent(string surname)
         {
-            if (surname != null && number > 0)
+            if (surname != null)
             {
                 using (DataBaseContext db = new DataBaseContext())
                 {
-                    var FindedSGroup = db.Hostels.Where(findedgroup => findedgroup.Number == number).FirstOrDefault();
                     var FindedStudent = db.Students.Where(findedstudent => findedstudent.Surname == surname).FirstOrDefault();
-                    db.Students.Remove(FindedStudent);
+                    FindedStudent.RoomID = 0;   
                     db.SaveChanges();
                     return true;
                 }
             }
             else return false;
         }
-        public List<Hostel> SearchHostel(int number)
+        public List<Student> SearchHostel()
         {
             using (DataBaseContext db = new DataBaseContext())
             {
-                return db.Hostels.Where(a => a.Number == number).ToList();
+                return db.Students.Where(a => a.RoomID > 0).ToList();
             }
         }
-        public List<Hostel> SearchRooms(int number, int rooms)
+        public List<Student> SearchRooms(int rooms)
         {
             using (DataBaseContext db = new DataBaseContext())
             {
-                return db.Hostels.Where(a => a.Room == rooms).ToList();
+                return db.Students.Where(a => a.RoomID == rooms).ToList();
             }
         }
     }

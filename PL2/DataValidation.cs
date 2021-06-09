@@ -127,19 +127,19 @@ namespace PL2
         }
         public int AddtoRoom(int room)
         {
-            int tmpNumber;
+            int tmpRoom;
 
             if (Checks.CheckNumber(room))
             {
                 Console.Clear();
-                tmpNumber = room;
+                tmpRoom = room;
                 return room;
             }
             else
             {
                 Console.WriteLine("Невірний формат номеру. Введіть номер знову");
-                tmpNumber = int.Parse(Console.ReadLine());
-                return AddtoHostel(tmpNumber);// or retutn AddName() ?
+                tmpRoom = int.Parse(Console.ReadLine());
+                return AddtoHostel(tmpRoom);// or retutn AddName() ?
             }
         }
     }

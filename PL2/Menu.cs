@@ -27,7 +27,7 @@ namespace PL2
             Console.WriteLine("14. Виселення студента з гуртожитка  - натисніть: \"14\".");
             Console.WriteLine("15. Продивитися інформацію про мешканців гуртожитка  - натисніть: \"15\".");
             Console.WriteLine("16. Продивитися інформацію про мешканців гуртожитка по кімнатах  - натисніть: \"16\".");
-           
+            Console.WriteLine("17. Щоб додати кімнати до гуртожитку  - натисніть: \"17\".");
             int answer = Int32.Parse(Console.ReadLine());
 
             switch (answer)
@@ -79,10 +79,10 @@ namespace PL2
                     break;
                 case 16:
                     SearchRooms();
-                    break;
-                    //default:
-                    //    OpenMenu();
-                    //    break;
+                    break;   
+               case 17:
+                    AddRoom();
+                break;
             }
         }
         public void AddStudent()
@@ -131,7 +131,7 @@ namespace PL2
             Console.Clear();
 
             StudentService student = new StudentService();
-            bool result = student.AddStudent(name, surname, year, mounth, day, groupname, number, room);
+            bool result = student.AddStudent(name, surname, year, mounth, day, groupname, room);
             if (result == true)
             {
                 Console.WriteLine("Студент додан успішно");
@@ -473,13 +473,13 @@ namespace PL2
             validator.AddtoHostel(number);
             Console.Clear();
 
-            Console.WriteLine("Введіть кількість кімнат");
-            room = int.Parse(Console.ReadLine());
-            validator.AddtoHostel(room);
-            Console.Clear();
+            //Console.WriteLine("Введіть кількість кімнат");
+            //room = int.Parse(Console.ReadLine());
+            //validator.AddtoHostel(room);
+            //Console.Clear();
 
             HostelService hostel = new HostelService();
-            bool result = hostel.AddHostel(number, room);
+            bool result = hostel.AddHostel(number);
             if (result == true)
             {
                 Console.WriteLine("Гуртожиток додан успішно");
@@ -510,7 +510,7 @@ namespace PL2
             Console.Clear();
 
             HostelService hostel = new HostelService();
-            bool result = hostel.ChangeHostel(number, room);
+            bool result = hostel.ChangeHostel(number);
             if (result == true)
             {
                 Console.WriteLine("Гуртожиток успішно змінен");
@@ -543,7 +543,7 @@ namespace PL2
             Console.Clear();
 
             HostelService hostel = new HostelService();
-            bool result = hostel.DeleteStudent(number, surname);
+            bool result = hostel.DeleteStudent(surname);
             if (result == true)
             {
                 Console.WriteLine("Студент виселен успішно");
@@ -570,13 +570,13 @@ namespace PL2
             Console.Clear();
 
             HostelService hostel = new HostelService();
-            var result = hostel.SearchHostel(number);
+            var result = hostel.SearchHostel();
             if (result != null)
             {
                Console.WriteLine("Натисність на будь-яку клавішу для повернення в меню");
                foreach (var item in result)
                {
-                   Console.WriteLine(item.Number);
+                   Console.WriteLine(item.Surname);
                }
                Console.ReadLine();
                OpenMenu();
@@ -591,28 +591,51 @@ namespace PL2
         }
         public void SearchRooms()
         {
-            int room;
-
-            Console.WriteLine("Введіть кількість кімнат");
-            room = int.Parse(Console.ReadLine());
-            validator.AddtoHostel(room);
-            Console.Clear();
-
             HostelService hostel = new HostelService();
-            var result = hostel.SearchHostel(room);
+            var result = hostel.SearchHostel();
             if (result != null)
             {
                 Console.WriteLine("Натисність на будь-яку клавішу для повернення в меню");
                 foreach (var item in result)
                 {
-                    Console.WriteLine(item.Room);
+                    Console.WriteLine(item.RoomID);
                 }
                 Console.ReadLine();
                 OpenMenu();
             }
             else
+            {              
+                Console.WriteLine("Натисність на будь-яку клавішу для повернення в меню");
+                Console.ReadLine();
+                OpenMenu();
+            }      
+        }
+        public void AddRoom()
+        {
+            int room, number ;
+
+            Console.WriteLine("Введіть номер гуртожитка");
+            number = int.Parse(Console.ReadLine());
+            validator.AddtoHostel(number);
+            Console.Clear();
+
+            Console.WriteLine("Введіть номер кімнати");
+            room = int.Parse(Console.ReadLine());
+            validator.AddtoHostel(room);
+            Console.Clear();
+
+            HostelService hostel = new HostelService();
+            var result = hostel.AddRoom(room, number);
+            if (result == true)
             {
-                Console.WriteLine("гуртожитка не існує");
+                Console.WriteLine("Кімната додана успішно");
+                Console.WriteLine("Натисність на будь-яку клавішу для повернення в меню");
+                Console.ReadLine();
+                OpenMenu();
+            }
+            else
+            {
+                Console.WriteLine("такої кімнати не існує");
                 Console.WriteLine("Натисність на будь-яку клавішу для повернення в меню");
                 Console.ReadLine();
                 OpenMenu();

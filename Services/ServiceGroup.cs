@@ -20,7 +20,7 @@ namespace Services
                         Name = name
                     };
 
-                    db.Add(NewGroup);
+                    db.Groups.Add(NewGroup);
                     db.SaveChanges();
                     return true;
                 }
