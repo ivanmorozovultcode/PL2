@@ -12,6 +12,7 @@ namespace DAL2
         public DbSet<Model.Student> Students { get; set; }
         public DbSet<Model.Group> Groups { get; set; }
         public DbSet<Model.Hostel> Hostels { get; set; }
+        public DbSet<Model.Room> Rooms { get; set; }
         public DataBaseContext(DbContextOptions<DataBaseContext> options)
             : base(options)
         {

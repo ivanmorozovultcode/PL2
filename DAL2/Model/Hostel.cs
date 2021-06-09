@@ -10,8 +10,7 @@ namespace DAL2.Model
     {
         public int ID { get; set; }
         public int Number { get; set; }
-        public int Room { get; set; }
+        public List<Room> Rooms { get; set; } = new List<Room>();
        // public int Residents { get; set; }
-        public List<Student> Students { get; set; } = new List<Student>();
     }
 }

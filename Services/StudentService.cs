@@ -9,21 +9,21 @@ namespace Services
 {
     public class StudentService
     {
-        public bool AddStudent(string name, string surname, int year, int mounth, int day, string namegroup, int number, int room)
+        public bool AddStudent(string name, string surname, int year, int mounth, int day, string namegroup, int room)
         {
-            if (name != null && surname != null && year > 0 && mounth > 0 && day > 0 && number > 0 && number > 0)
+            if (name != null && surname != null && year > 0 && mounth > 0 && day > 0 && room > 0)
             {
                 using (DataBaseContext db = new DataBaseContext())
                 {
                     var Group = db.Groups.Where(a => a.Name == namegroup).FirstOrDefault();
+                    var Room = db.Rooms.Where(a => a.RoomNumber == room).FirstOrDefault();
                     Student NewStudent = new Student
                     {
                         Name = name,
                         Surname = surname,
                         Date = new DateTime(year, mounth, day),
                         GroupID = Group.ID,
-                        Number = number,
-                        Room = room
+                        RoomID = Room.ID
                     };
 
                     db.Add(NewStudent);
@@ -62,8 +62,9 @@ namespace Services
                     FindedStudent.Surname = surname;
                     FindedStudent.Date = new DateTime(year, mounth, day);
                     FindedStudent.Group.Name = groupname;
-                    FindedStudent.Hostel.Number = number;
-                    FindedStudent.Hostel.Room = room;
+                    // FindedStudent.Hostel.Number = number;
+                    var FindedRoom = db.Rooms.Where(a => a.RoomNumber == number).FirstOrDefault();
+                    FindedStudent.RoomID = FindedRoom.ID;
                     db.SaveChanges();
                     return true;
                 }

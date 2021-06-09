@@ -14,9 +14,8 @@ namespace DAL2.Model
         public DateTime Date { get; set; }
         public int GroupID { get; set; }
         public Group Group { get; set; }
-        public int Number { get; set; }
-        public int Room { get; set; }
-        public Hostel Hostel { get; set; }
+        public int RoomID { get; set; }
+        public Room room { get; set; }
 
     }
 }
