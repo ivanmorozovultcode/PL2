@@ -21,7 +21,6 @@ namespace BLL_tests
         }
 
         [TestMethod]
-
        public void RemoveGroup()
        {
             string namegroup = "PI-224";
@@ -46,8 +45,6 @@ namespace BLL_tests
 
             Assert.AreEqual(expected, result);
         }
-
-
 
         [TestMethod]
         public void SearchGroup()
