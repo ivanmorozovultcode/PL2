@@ -20,6 +20,40 @@ namespace BLL_tests
        
         }
 
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         [TestMethod]
        public void RemoveGroup()
        {
