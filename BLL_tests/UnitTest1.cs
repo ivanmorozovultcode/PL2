@@ -19,41 +19,7 @@ namespace BLL_tests
             Assert.AreEqual(expected, result);
        
         }
-
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    
         [TestMethod]
        public void RemoveGroup()
        {
