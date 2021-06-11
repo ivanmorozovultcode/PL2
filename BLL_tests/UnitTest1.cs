@@ -20,44 +20,6 @@ namespace BLL_tests
        
         }
     
-        [TestMethod]
-       public void RemoveGroup()
-       {
-            string namegroup = "PI-224";
-            bool expected = true;
-
-
-            ServiceGroup group = new ServiceGroup();
-            bool result = group.RemoveGroup(namegroup);
-
-            Assert.AreEqual(expected, result);
-       }
-       
-        [TestMethod]
-        public void ChangeGroup()
-        {
-            string namegroup = "PI-224";
-            bool expected = true;
-
-
-            ServiceGroup group = new ServiceGroup();
-            bool result = group.ChangeGroup(namegroup);
-
-            Assert.AreEqual(expected, result);
-        }
-
-        [TestMethod]
-        public void SearchGroup()
-        {
-            string namegroup = "PI-224";
-            bool expected = true;
-            //123 test
-            ServiceGroup group = new ServiceGroup();
-            var result = group.SearchGroup(namegroup);
-
-            Assert.AreEqual(expected, result);
-        }
-      
         //public void StudentAddtoDataBaseEqualsTrue()
         //{
         //    string name = "Ivan";
